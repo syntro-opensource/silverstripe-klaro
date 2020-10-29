@@ -48,7 +48,7 @@ jobs:
           composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
           composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
       - name: run phpunit
-        run: vendor/bin/phpunit -c "phpunit.xml" tests/php
+        run: vendor/bin/phpunit -c "phpunit.xml" tests/
       - name: generate coverage
         run: phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests/php
         if: ${{ matrix.php == '7.4' }}
@@ -89,4 +89,4 @@ jobs:
       - name: lint tests
         uses: chindit/actions-phpcs@master
         with:
-          dir: tests/php/
+          dir: tests/
