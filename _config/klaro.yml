@@ -1,0 +1,14 @@
+---
+Name: silverstripe-klaro
+---
+SilverStripe\CMS\Controllers\ContentController:
+  extensions:
+    - Syntro\SilverstripeKlaro\Extension\ContentControllerExtension
+
+SilverStripe\Control\Director:
+  rules:
+    '_klaro-config.js': 'Syntro\SilverstripeKlaro\Extension\KlaroConfigController'
+
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\View\Requirements_Backend:
+    class: Syntro\SilverstripeKlaro\KlaroRequirements_Backend

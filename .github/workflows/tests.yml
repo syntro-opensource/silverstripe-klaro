@@ -1,0 +1,92 @@
+name: 🎭 Tests
+on:
+  - push
+env:
+  DB: MYSQL
+  PDO: 1
+  SS_ENVIRONMENT_TYPE: "dev"
+  RECIPE_CMS_VERSION: 4.x-dev
+jobs:
+  phpunit:
+    name: 🧩 PHPUnit
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - 7.1
+          - 7.2
+          - 7.3
+          - 7.4
+    container: brettt89/silverstripe-web:${{ matrix.php }}-apache
+    services:
+      database:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    env:
+      SS_DEFAULT_ADMIN_USERNAME: admin
+      SS_DEFAULT_ADMIN_PASSWORD: admin
+      SS_DATABASE_SERVER: database
+      SS_DATABASE_NAME: ss_default_${{ matrix.php }}
+      SS_DATABASE_USERNAME: root
+      SS_DATABASE_PASSWORD: ''
+      SS_ENVIRONMENT_TYPE: dev
+    steps:
+      - name: Install Composer
+        run: |
+          curl \
+            -sS https://getcomposer.org/installer \
+            | php && \
+            mv -f composer.phar /usr/local/bin/composer
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
+          composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+      - name: run phpunit
+        run: vendor/bin/phpunit -c "phpunit.xml" tests/php
+      - name: generate coverage
+        run: phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests/php
+        if: ${{ matrix.php == '7.4' }}
+      - name: submit coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+        if: ${{ matrix.php == '7.4' }}
+  phpstan:
+    name: 🔺 PHPStan
+    runs-on: ubuntu-latest
+    container: brettt89/silverstripe-web:7.4-apache
+    steps:
+      - name: Install Composer
+        run: |
+          curl \
+            -sS https://getcomposer.org/installer \
+            | php && \
+            mv -f composer.phar /usr/local/bin/composer
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
+          composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
+      - name: run phpstan
+        run: vendor/bin/phpstan analyse src/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
+  phpcs:
+    name: 🔮 PHPcs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: lint source
+        uses: chindit/actions-phpcs@master
+        with:
+          dir: src/
+      - name: lint tests
+        uses: chindit/actions-phpcs@master
+        with:
+          dir: tests/php/

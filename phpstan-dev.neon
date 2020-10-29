@@ -1,0 +1,6 @@
+parameters:
+    autoload_directories:
+        - src
+        - tests
+includes:
+    - ../../symbiote/silverstripe-phpstan/phpstan.neon

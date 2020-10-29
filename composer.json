@@ -1,0 +1,46 @@
+{
+    "name": "syntro/silverstripe-klaro",
+    "description": "Silverstripe module including klaro consent",
+    "type": "silverstripe-vendormodule",
+    "authors": [
+        {
+            "name": "Matthias Leutenegger",
+            "email": "hello@syntro.ch"
+        }
+    ],
+    "require": {
+        "silverstripe/cms": "^4",
+        "silverstripe/framework": "^4"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "symbiote/silverstripe-phpstan": "^4",
+        "phpstan/phpstan-shim": "~0.11.0",
+        "phpunit/phpunit": "^5.7"
+    },
+    "keywords": [
+        "silverstripe",
+        "silverstripe 4"
+    ],
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-4": {
+            "Syntro\\SilverstripeKlaro\\": "src/",
+            "Syntro\\SilverstripeKlaro\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpcs": "../../bin/phpcs src/ tests/php/",
+        "phpcbf": "../../bin/phpcbf src/ tests/php/",
+        "phpstan": "../../bin/phpstan analyse src/ --memory-limit=1G -c phpstan-dev.neon -a ../../symbiote/silverstripe-phpstan/bootstrap.php --no-ansi --level 4",
+        "phpunit": "../../bin/phpunit",
+        "phpunit-flush": "../../bin/phpunit . '' flush=1"
+    },
+    "extra": {
+        "expose": [
+            "client/dist"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

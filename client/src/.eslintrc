@@ -1,0 +1,3 @@
+{
+    "extends": "@syntro-opensource/eslint-config-base"
+}

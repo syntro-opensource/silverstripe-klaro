@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "watch": "webpack --watch --mode development",
+    "build": "webpack --mode production -vvv"
+  },
+  "name": "silverstripe-klaro",
+  "description": "implementation of Klaro consent manager for Silverstripe",
+  "dependencies": {
+    "@syntro-opensource/eslint-config-base": "^1.0.2",
+    "@syntro-opensource/webpack-config": "^1.0.6",
+    "klaro": "^0.7.4"
+  }
+}
