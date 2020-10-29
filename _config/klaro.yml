@@ -12,3 +12,8 @@ SilverStripe\Control\Director:
 SilverStripe\Core\Injector\Injector:
   SilverStripe\View\Requirements_Backend:
     class: Syntro\SilverstripeKlaro\KlaroRequirements_Backend
+
+# Syntro\SilverstripeKlaro\Control\KlaroConfigController:
+#   klaro_services:
+#     phpsession:
+#
