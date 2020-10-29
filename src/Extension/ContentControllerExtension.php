@@ -26,12 +26,5 @@ class ContentControllerExtension extends Extension
         Requirements::css('syntro/silverstripe-klaro:client/dist/bundle.css');
         Requirements::javascript('/_klaro-config.js', ['defer' => true]);
         Requirements::javascript('syntro/silverstripe-klaro:client/dist/klaro.js', ['defer' => true]);
-
-        KlaroRequirements::customKlaroScript(
-            <<<JS
-              alert("hi there");
-            JS,
-            'ganalytics'
-        );
     }
 }
