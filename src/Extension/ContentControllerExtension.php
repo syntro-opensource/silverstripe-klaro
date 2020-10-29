@@ -29,11 +29,9 @@ class ContentControllerExtension extends Extension
 
         KlaroRequirements::customKlaroScript(
             <<<JS
-          alert("hi there");
-        JS,
+              alert("hi there");
+            JS,
             'ganalytics'
         );
     }
 }
-
-?>
