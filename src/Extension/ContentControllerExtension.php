@@ -35,3 +35,5 @@ class ContentControllerExtension extends Extension
         );
     }
 }
+
+?>
