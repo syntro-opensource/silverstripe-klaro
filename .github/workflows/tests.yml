@@ -50,7 +50,7 @@ jobs:
       - name: run phpunit
         run: vendor/bin/phpunit -c "phpunit.xml" tests/
       - name: generate coverage
-        run: phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests/php
+        run: phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests/
         if: ${{ matrix.php == '7.4' }}
       - name: submit coverage
         uses: codecov/codecov-action@v1
