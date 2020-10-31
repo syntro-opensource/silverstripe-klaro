@@ -1,0 +1,14 @@
+de:
+  Syntro\SilverstripeKlaro\Config:
+    purpose_functional_title: Notwendige Services
+    purpose_functional_description: Diese Dienste sind für die Nutzung dieser Seite erforderlich.
+    service_session_title: Session
+    service_session_description: Dies ist das Standard-Session-Cookie.
+  Syntro\SilverstripeKlaro\Extension\SiteConfigExtension:
+    CONSENTNOTICELABEL: Text der Zustimmungsmeldung
+    CONSENTMODALLABEL: Text im Auswahl-Modal
+    PRIVACYPOLICYPAGELABEL: Datenschutzerklärung
+    COOKIENOTICETAB: Cookiemeldung
+    CONSENTNOTICEDESC: Dieser Text ersetzt den Standardtext in der Einstiegsmitteilung.
+    CONSENTMODALDESC: Dieser Text wird den Standardtext im Auswahl-Modal ersetzen.
+    PRIVACYPOLICYPAGEDESC: Falls gesetzt, wird ein Link zu dieser Seite im Auswahl-Modal angezeigt.
