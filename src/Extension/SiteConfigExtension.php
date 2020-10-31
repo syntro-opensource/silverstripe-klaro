@@ -44,6 +44,7 @@ class SiteConfigExtension extends DataExtension
 
     /**
      * Update Fields
+     * @param FieldList $fields the original fields
      * @return FieldList
      */
     public function updateCMSFields(FieldList $fields)
@@ -93,5 +94,3 @@ class SiteConfigExtension extends DataExtension
         return $labels;
     }
 }
-
- ?>
