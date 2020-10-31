@@ -18,7 +18,6 @@ use SilverStripe\Core\Manifest\ModuleResourceLoader;
  */
 class KlaroRequirements_Backend extends Requirements_Backend
 {
-
     /**
      * contains the script ressources which should be handled by klaro
      *
