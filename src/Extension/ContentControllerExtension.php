@@ -4,8 +4,9 @@ namespace Syntro\SilverstripeKlaro\Extension;
 
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
+use SilverStripe\View\HTML;
 
-use Syntro\SilverstripeKlaro\KlaroRequirements;
+use Syntro\SilverstripeKlaro\Config;
 
 /**
  * Extends the default content controller to include the built klaro.js
@@ -24,7 +25,13 @@ class ContentControllerExtension extends Extension
     public function onBeforeInit()
     {
         Requirements::css('syntro/silverstripe-klaro:client/dist/bundle.css');
-        Requirements::javascript('/_klaro-config.js', ['defer' => true]);
+        Requirements::insertHeadTags(HTML::createTag(
+            'script',
+            [
+                'type' => 'application/javascript'
+            ],
+            "//<![CDATA[\n" . Config::render() . "\n//]]>"
+        ));
         Requirements::javascript('syntro/silverstripe-klaro:client/dist/klaro.js', ['defer' => true]);
     }
 }
