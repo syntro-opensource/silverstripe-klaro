@@ -55,7 +55,10 @@ class Config
       * @var array
       */
     private static $klaro_purposes = [
-         'required' => ['title' => 'Required Services']
+         'required' => [
+             'title' => 'Required Services',
+             'description' => 'These services are required for the base functionality of this page.'
+         ]
      ];
 
      /**
@@ -77,11 +80,11 @@ class Config
       */
     private static $klaro_services = [
          'session' => [
-             'title' => 'Session default',
+             'title' => 'Session',
+             'description' => 'This is the default session cookie.',
              'purposes' => ['required'],
              'cookies' => [
-                 '/^PHP.*$/',
-                 ['/^PHP.*$/', '/', 'localhost']
+                 'PHPSESSION'
              ],
              'default' => true,
              'required' => true
@@ -183,7 +186,11 @@ class Config
                     1
                 );
             }
-            $purposes[$name] = _t(__CLASS__ . '.purpose_' . $name . '_title', $data['title']);
+            $purposes[$name]['title'] = _t(__CLASS__ . '.purpose_' . $name . '_title', $data['title']);
+            if (isset($data['description'])) {
+                $purposes[$name]['description'] = _t(__CLASS__ . '.purpose_' . $name . '_description', $data['description']);
+            }
+
         }
         return $purposes;
     }

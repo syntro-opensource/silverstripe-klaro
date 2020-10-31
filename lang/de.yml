@@ -1,3 +1,6 @@
 de:
   Syntro\SilverstripeKlaro\Config:
     purpose_required_title: Notwendige Services
+    purpose_required_description: Diese Dienste sind für die Nutzung dieser Seite erforderlich.
+    service_session_title: Session
+    service_session_description: Dies ist das Standard-Session-Cookie.
