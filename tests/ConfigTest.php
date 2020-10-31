@@ -135,4 +135,86 @@ class ConfigTest extends SapphireTest
         $this->assertArrayHasKey('title', $purposes['purpose2']);
         $this->assertArrayNotHasKey('description', $purposes['purpose2']);
     }
+
+    /**
+     * testServicesForTemplate
+     *
+     * @return void
+     */
+    public function testServicesForTemplatePopulatesService()
+    {
+        SilverStripeConfig::modify()->set(Config::class, 'klaro_purposes', [
+            'purpose' => ['title' => 'testtitle']
+        ]);
+        SilverStripeConfig::modify()->set(Config::class, 'klaro_services', [
+            'service1' => ['title' => 'service1', 'purposes' => ['purpose']]
+        ]);
+        i18n::set_locale('de_CH');
+
+        $services = Config::getServicesForTemplate();
+        $this->assertEquals(1, count($services));
+        $service = $services[0];
+        $this->assertArrayHasKey('translations', $service);
+        $this->assertArrayHasKey('de', $service['translations']);
+        $this->assertArrayHasKey('title', $service['translations']['de']);
+        $this->assertArrayNotHasKey('description', $service['translations']['de']);
+        $this->assertArrayHasKey('name', $service);
+        $this->assertEquals('service1',$service['name']);
+        $this->assertArrayHasKey('purposes', $service);
+        $this->assertEquals(['purpose'],$service['purposes']);
+        $this->assertArrayNotHasKey('cookies', $service);
+        $this->assertArrayNotHasKey('default', $service);
+        $this->assertArrayNotHasKey('required', $service);
+        $this->assertArrayNotHasKey('optOut', $service);
+        $this->assertArrayNotHasKey('onlyOnce', $service);
+
+
+        SilverStripeConfig::modify()->set(Config::class, 'klaro_services', [
+            'service1' => [
+                'title' => 'service1',
+                'description' => 'description of this service',
+                'cookies' => ['cookie1', 'cookie2'],
+                'default' => true,
+                'required' => true,
+                'optOut' => true,
+                'onlyOnce' => true,
+                'purposes' => ['purpose']
+            ]
+        ]);
+        $services = Config::getServicesForTemplate();
+        $this->assertEquals(1, count($services));
+        $service = $services[0];
+        $this->assertArrayHasKey('translations', $service);
+        $this->assertArrayHasKey('de', $service['translations']);
+        $this->assertEquals('service1', $service['translations']['de']['title']);
+        $this->assertEquals('description of this service', $service['translations']['de']['description']);
+        $this->assertEquals(['purpose'],$service['purposes']);
+        $this->assertEquals(['cookie1', 'cookie2'],$service['cookies']);
+        $this->assertEquals(true,$service['default']);
+        $this->assertEquals(true,$service['required']);
+        $this->assertEquals(true,$service['optOut']);
+        $this->assertEquals(true,$service['onlyOnce']);
+
+    }
+
+    /**
+     * testTranslationsForTemplate
+     *
+     * @return void
+     */
+    public function testTranslationsForTemplate()
+    {
+        SilverStripeConfig::modify()->set(Config::class, 'klaro_purposes', [
+            'purpose' => ['title' => 'testtitle']
+        ]);
+        SilverStripeConfig::modify()->set(Config::class, 'klaro_services', [
+            'service1' => ['title' => 'service1', 'purposes' => ['purpose']]
+        ]);
+        i18n::set_locale('de_CH');
+
+        $translations = Config::getTranslationsForTemplate();
+        $this->assertArrayHasKey('de', $translations);
+        $this->assertArrayHasKey('purposes', $translations['de']);
+        $this->assertArrayHasKey('purpose', $translations['de']['purposes']);
+    }
 }
