@@ -175,7 +175,7 @@ class Config
      *
      * @return array
      */
-    private static function getPurposesForTemplate()
+    public static function getPurposesForTemplate()
     {
         $configuredPurposes = self::getPurposes();
         $purposes = [];
@@ -200,7 +200,7 @@ class Config
      *
      * @return array
      */
-    private static function getServicesForTemplate()
+    public static function getServicesForTemplate()
     {
         $configuredServices = self::getServices();
         $services = [];
