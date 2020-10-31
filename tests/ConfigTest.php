@@ -159,9 +159,9 @@ class ConfigTest extends SapphireTest
         $this->assertArrayHasKey('title', $service['translations']['de']);
         $this->assertArrayNotHasKey('description', $service['translations']['de']);
         $this->assertArrayHasKey('name', $service);
-        $this->assertEquals('service1',$service['name']);
+        $this->assertEquals('service1', $service['name']);
         $this->assertArrayHasKey('purposes', $service);
-        $this->assertEquals(['purpose'],$service['purposes']);
+        $this->assertEquals(['purpose'], $service['purposes']);
         $this->assertArrayNotHasKey('cookies', $service);
         $this->assertArrayNotHasKey('default', $service);
         $this->assertArrayNotHasKey('required', $service);
@@ -188,13 +188,12 @@ class ConfigTest extends SapphireTest
         $this->assertArrayHasKey('de', $service['translations']);
         $this->assertEquals('service1', $service['translations']['de']['title']);
         $this->assertEquals('description of this service', $service['translations']['de']['description']);
-        $this->assertEquals(['purpose'],$service['purposes']);
-        $this->assertEquals(['cookie1', 'cookie2'],$service['cookies']);
-        $this->assertEquals(true,$service['default']);
-        $this->assertEquals(true,$service['required']);
-        $this->assertEquals(true,$service['optOut']);
-        $this->assertEquals(true,$service['onlyOnce']);
-
+        $this->assertEquals(['purpose'], $service['purposes']);
+        $this->assertEquals(['cookie1', 'cookie2'], $service['cookies']);
+        $this->assertEquals(true, $service['default']);
+        $this->assertEquals(true, $service['required']);
+        $this->assertEquals(true, $service['optOut']);
+        $this->assertEquals(true, $service['onlyOnce']);
     }
 
     /**
