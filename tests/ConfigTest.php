@@ -2,6 +2,7 @@
 
 namespace Syntro\SilverstripeKlaro\Tests;
 
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\SapphireTest;
 use Syntro\SilverstripeKlaro\Config;
 use \SilverStripe\Core\Config\Config as SilverStripeConfig;
@@ -13,6 +14,7 @@ use SilverStripe\i18n\i18n;
  */
 class ConfigTest extends SapphireTest
 {
+    protected static $fixture_file = './fixture.yml';
 
     /**
      * assert that the rendering fails when a purpose has no title
@@ -215,5 +217,30 @@ class ConfigTest extends SapphireTest
         $this->assertArrayHasKey('de', $translations);
         $this->assertArrayHasKey('purposes', $translations['de']);
         $this->assertArrayHasKey('purpose', $translations['de']['purposes']);
+    }
+
+    /**
+     * testSiteconfigFields
+     *
+     * @return void
+     */
+    public function testSiteconfigFields()
+    {
+        i18n::set_locale('de_CH');
+        $config = SiteConfig::current_site_config();
+
+        $translations = Config::getTranslationsForTemplate();
+        $this->assertArrayNotHasKey('consentNotice', $translations['de']);
+        $this->assertArrayNotHasKey('consentModal', $translations['de']);
+
+        $config->ConsentNotice = 'Notice';
+        $config->ConsentModal = 'Modal';
+        $config->write();
+
+        $translations = Config::getTranslationsForTemplate();
+        $this->assertArrayHasKey('consentNotice', $translations['de']);
+        $this->assertEquals('Notice', $translations['de']['consentNotice']['description']);
+        $this->assertArrayHasKey('consentModal', $translations['de']);
+        $this->assertEquals('Modal', $translations['de']['consentModal']['description']);
     }
 }

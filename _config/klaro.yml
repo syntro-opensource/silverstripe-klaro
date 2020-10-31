@@ -9,6 +9,9 @@ SilverStripe\Core\Injector\Injector:
   SilverStripe\View\Requirements_Backend:
     class: Syntro\SilverstripeKlaro\KlaroRequirements_Backend
 
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Syntro\SilverstripeKlaro\Extension\SiteConfigExtension
 # Syntro\SilverstripeKlaro\Control\KlaroConfigController:
 #   klaro_services:
 #     phpsession:

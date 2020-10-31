@@ -2,6 +2,7 @@
 
 namespace Syntro\SilverstripeKlaro;
 
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\View\SSViewer;
 use SilverStripe\ORM\ArrayList;
@@ -55,7 +56,7 @@ class Config
       * @var array
       */
     private static $klaro_purposes = [
-         'required' => [
+         'functional' => [
              'title' => 'Required Services',
              'description' => 'These services are required for the base functionality of this page.'
          ]
@@ -82,7 +83,7 @@ class Config
          'session' => [
              'title' => 'Session',
              'description' => 'This is the default session cookie.',
-             'purposes' => ['required'],
+             'purposes' => ['functional'],
              'cookies' => [
                  'PHPSESSION'
              ],
@@ -110,7 +111,7 @@ class Config
     {
         $config = [
             'translations' => self::getTranslationsForTemplate(),
-            'services' => self::getServicesForTemplate()
+            'services' => self::getServicesForTemplate(),
         ];
         foreach (self::getOptions() as $option => $value) {
             if ($option == 'translations' || $option == 'services') {
@@ -167,6 +168,16 @@ class Config
         $translations = [
             'purposes' => self::getPurposesForTemplate()
         ];
+        $siteConfig = SiteConfig::current_site_config();
+        if ($policy = $siteConfig->PrivacyPolicyPage) {
+            $translations['privacyPolicyUrl'] = $policy->Link();
+        }
+        if (!is_null($siteConfig->ConsentNotice) && $siteConfig->ConsentNotice != '') {
+            $translations['consentNotice'] = ['description' => $siteConfig->ConsentNotice];
+        }
+        if (!is_null($siteConfig->ConsentModal) && $siteConfig->ConsentModal != '') {
+            $translations['consentModal'] = ['description' => $siteConfig->ConsentModal];
+        }
         return [self::getLang() => $translations];
     }
 
