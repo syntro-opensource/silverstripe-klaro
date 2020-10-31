@@ -190,7 +190,6 @@ class Config
             if (isset($data['description'])) {
                 $purposes[$name]['description'] = _t(__CLASS__ . '.purpose_' . $name . '_description', $data['description']);
             }
-
         }
         return $purposes;
     }
