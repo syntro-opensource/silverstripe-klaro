@@ -26,7 +26,9 @@ class ContentControllerExtension extends Extension
      */
     public function onBeforeInit()
     {
-        Requirements::css('syntro/silverstripe-klaro:client/dist/bundle.css');
+        if ($this->owner->config()->get('load_klaro_css')) {
+            Requirements::css('syntro/silverstripe-klaro:client/dist/bundle.css');
+        }
         Requirements::insertHeadTags(HTML::createTag(
             'script',
             [
