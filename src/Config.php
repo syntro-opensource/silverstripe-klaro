@@ -51,6 +51,7 @@ class Config
       * Contains purposes used by klaro. This is an array where the keys
       * specify the  identifier of the purpose and value is an array with:
       * - 'title' : the title of the purpose
+      * - 'description'
       *
       * @config
       * @var array

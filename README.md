@@ -41,7 +41,7 @@ composer require syntro/silverstripe-klaro
 ```
 
 ## Usage
-### Getting Started
+### Quick Start
 If you just want to add a new service, add the script like so:
 ```php
 use Syntro\SilverstripeKlaro\KlaroRequirements;
