@@ -32,6 +32,13 @@ class KlaroRequirements_Backend extends Requirements_Backend
      */
     protected $customKlaroScript = [];
 
+    /**
+     * All css files that are inserted into the page's HTML and handled by klaro
+     *
+     * @var array
+     */
+    protected $klaroCss = [];
+
 
     /**
      * klaroJavascript - add a klaro managed script to the stack.
@@ -127,6 +134,35 @@ class KlaroRequirements_Backend extends Requirements_Backend
     }
 
     /**
+     * Register the given stylesheet into the list of requirements.
+     *
+     * @param string $file      The CSS file to load, relative to site root
+     * @param string $klaroName the name of this service
+     * @param string $media     Comma-separated list of media types to use in the link tag
+     *                          (e.g. 'screen,projector')
+     * @param array  $options   List of options. Available options include:
+     *                          - 'integrity' : SubResource Integrity hash
+     *                          - 'crossorigin' : Cross-origin policy for
+     *                          the resource
+     *
+     * @return void
+     */
+    public function klaroCss($file, $klaroName, $media = null, $options = [])
+    {
+        $file = ModuleResourceLoader::singleton()->resolvePath($file);
+
+        $integrity = $options['integrity'] ?? null;
+        $crossorigin = $options['crossorigin'] ?? null;
+
+        $this->klaroCss[$file] = [
+            "name" => $klaroName,
+            "media" => $media,
+            "integrity" => $integrity,
+            "crossorigin" => $crossorigin,
+        ];
+    }
+
+    /**
      * Returns an array of required JavaScript, excluding blocked
      * and duplicates of provided files.
      *
@@ -148,6 +184,16 @@ class KlaroRequirements_Backend extends Requirements_Backend
     }
 
     /**
+     * Returns an array of required CSS file
+     *
+     * @return array
+     */
+    public function getKlaroCss()
+    {
+        return $this->klaroCss;
+    }
+
+    /**
      * Update the given HTML and add the klaro managed scripts
      *
      * @param string $content HTML content that has already been parsed from the $templateFile
@@ -159,6 +205,7 @@ class KlaroRequirements_Backend extends Requirements_Backend
         // Process the content normally and apply all necessary tags
         $content = parent::includeInHTML($content);
 
+        $requirements = '';
         $jsRequirements = '';
 
         // Script tags for js links
@@ -190,6 +237,31 @@ class KlaroRequirements_Backend extends Requirements_Backend
             );
             $jsRequirements .= "\n";
         }
+
+        // CSS file links
+        foreach ($this->getKlaroCss() as $file => $attributes) {
+            $htmlAttributes = [
+                'type' => 'text/plain',
+                'rel' => 'stylesheet',
+                'data-type' => 'text/css',
+                'data-href' => $this->pathForFile($file),
+                'data-name' => $attributes['name']
+            ];
+            if (!empty($attributes['media'])) {
+                $htmlAttributes['media'] = $attributes['media'];
+            }
+            if (!empty($attributes['integrity'])) {
+                $htmlAttributes['integrity'] = $attributes['integrity'];
+            }
+            if (!empty($attributes['crossorigin'])) {
+                $htmlAttributes['crossorigin'] = $attributes['crossorigin'];
+            }
+            $requirements .= HTML::createTag('link', $htmlAttributes);
+            $requirements .= "\n";
+        }
+
+        // Inject CSS  into body
+        $content = $this->insertTagsIntoHead($requirements, $content);
 
         // Inject scripts
         if ($this->getForceJSToBottom()) {

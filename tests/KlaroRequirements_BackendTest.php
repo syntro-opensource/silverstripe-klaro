@@ -69,6 +69,35 @@ class KlaroRequirements_BackendTest extends SapphireTest
      *
      * @return void
      */
+    public function testKlaroCssAdd()
+    {
+        $backend = KlaroRequirements_Backend::create();
+        $backend->klaroCss('/test.css', 'testservice', 'print', [
+            'integrity' => 'testintegrity',
+            'crossorigin' => 'testcrossorigin',
+        ]);
+
+        $requiredScripts = $backend->getKlaroCss();
+
+        $this->assertEquals(1, count($requiredScripts));
+        $this->assertArrayHasKey('/test.css', $requiredScripts);
+
+        $script = $requiredScripts['/test.css'];
+        $this->assertArrayHasKey('name', $script);
+        $this->assertEquals('testservice', $script['name']);
+        $this->assertArrayHasKey('media', $script);
+        $this->assertEquals('print', $script['media']);
+        $this->assertArrayHasKey('integrity', $script);
+        $this->assertEquals('testintegrity', $script['integrity']);
+        $this->assertArrayHasKey('crossorigin', $script);
+        $this->assertEquals('testcrossorigin', $script['crossorigin']);
+    }
+
+    /**
+     * test
+     *
+     * @return void
+     */
     public function testKlaroScriptClear()
     {
         $backend = KlaroRequirements_Backend::create();
@@ -137,6 +166,26 @@ class KlaroRequirements_BackendTest extends SapphireTest
             '<script type="text/plain" data-name="testservice" data-type="application/javascript">//<![CDATA[
 some script
 //]]></script>',
+            $insertedHTML
+        );
+    }
+
+    /**
+     * test
+     *
+     * @return void
+     */
+    public function testIncludeInHTMLForKlaroCss()
+    {
+        $backend = KlaroRequirements_Backend::create();
+        $backend->klaroCss('/test.css', 'testservice', 'print', [
+            'integrity' => 'testintegrity',
+            'crossorigin' => 'testcrossorigin',
+        ]);
+
+        $insertedHTML = $backend->includeInHTML(self::HTMLCONTENT);
+        $this->assertContains(
+            '<link type="text/plain" rel="stylesheet" data-type="text/css" data-href="/test.css" data-name="testservice" media="print" integrity="testintegrity" crossorigin="testcrossorigin" />',
             $insertedHTML
         );
     }

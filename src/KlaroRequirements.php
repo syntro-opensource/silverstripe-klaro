@@ -70,4 +70,24 @@ class KlaroRequirements
         $backend = self::backend();
         $backend->customKlaroScript($script, $klaroName, $uniquenessID);
     }
+
+    /**
+     * klaroCss - add a klaro managed script to the stack.
+     *
+     * @param string $file      The CSS file to load, relative to site root
+     * @param string $klaroName the name of this service
+     * @param string $media     Comma-separated list of media types to use in the link tag
+     *                          (e.g. 'screen,projector')
+     * @param array  $options   List of options. Available options include:
+     *                          - 'integrity' : SubResource Integrity hash
+     *                          - 'crossorigin' : Cross-origin policy for
+     *                          the resource
+     * @return void
+     */
+    public static function klaroCss($file, $klaroName, $media = null, $options = [])
+    {
+        /** @var KlaroRequirements_Backend */
+        $backend = self::backend();
+        $backend->klaroCss($file, $klaroName, $media, $options);
+    }
 }
