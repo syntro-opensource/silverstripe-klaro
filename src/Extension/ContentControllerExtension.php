@@ -14,6 +14,7 @@ use Syntro\SilverstripeKlaro\Config;
  * script and css
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
+ * @codeCoverageIgnore
  */
 class ContentControllerExtension extends Extension
 {

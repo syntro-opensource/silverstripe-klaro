@@ -13,6 +13,7 @@ use SilverStripe\CMS\Model\SiteTree;
  * dialog
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
+ * @codeCoverageIgnore
  */
 class SiteConfigExtension extends DataExtension
 {
