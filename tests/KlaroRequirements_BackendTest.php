@@ -6,7 +6,7 @@ use SilverStripe\Dev\SapphireTest;
 use Syntro\SilverstripeKlaro\KlaroRequirements_Backend;
 
 /**
- * Test the Tag class
+ * Test the Backend class
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class KlaroRequirements_BackendTest extends SapphireTest
