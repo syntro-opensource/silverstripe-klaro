@@ -1,5 +1,5 @@
 
-# Service Management
+# Service Management
 
 Service management is split in two different parts:
 
