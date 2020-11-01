@@ -5,6 +5,7 @@ namespace Syntro\SilverstripeKlaro\Extension;
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\HTML;
+use Syntro\SilverstripeKlaro\KlaroRequirements;
 
 use Syntro\SilverstripeKlaro\Config;
 

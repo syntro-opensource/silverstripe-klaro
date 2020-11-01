@@ -1,7 +1,7 @@
 {
   "scripts": {
     "watch": "webpack --watch --mode development",
-    "build": "webpack --mode production -vvv"
+    "build": "webpack --mode production"
   },
   "name": "silverstripe-klaro",
   "description": "implementation of Klaro consent manager for Silverstripe",
