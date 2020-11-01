@@ -4,6 +4,7 @@ Name: silverstripe-klaro
 SilverStripe\CMS\Controllers\ContentController:
   extensions:
     - Syntro\SilverstripeKlaro\Extension\ContentControllerExtension
+  load_klaro_css: true
 
 SilverStripe\Core\Injector\Injector:
   SilverStripe\View\Requirements_Backend:
