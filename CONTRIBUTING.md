@@ -16,3 +16,4 @@ on this module:
   - PHPUnit: `npx ssdev run -- vendor/bin/phpunit vendor/syntro/silverstripe-klaro/`
   - PHPCS: `npx ssdev run -- vendor/bin/phpcs vendor/syntro/silverstripe-klaro/`
   - PHPStan: `ssdev run -- bash -c "cd vendor/syntro/silverstripe-klaro && ../../bin/phpstan analyse src/ --memory-limit=1G -c phpstan-dev.neon -a ../../symbiote/silverstripe-phpstan/bootstrap.php --no-ansi --level 4"`
+- open a pull request to the `master` branch
