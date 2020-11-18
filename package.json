@@ -1,7 +1,8 @@
 {
   "scripts": {
     "watch": "webpack --watch --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "release": "git fetch && git-chglog -o CHANGELOG.md $([[ ! -z $npm_config_next ]] && echo \"--next-tag $npm_config_next\" )"
   },
   "name": "silverstripe-klaro",
   "description": "implementation of Klaro consent manager for Silverstripe",
