@@ -9,6 +9,6 @@
   "dependencies": {
     "@syntro-opensource/eslint-config-base": "^1.0.2",
     "@syntro-opensource/webpack-config": "^1.1.0",
-    "klaro": "^0.7.8"
+    "klaro": "^0.7.16"
   }
 }
