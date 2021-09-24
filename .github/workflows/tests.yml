@@ -54,7 +54,7 @@ jobs:
         run: phpdbg -qrr vendor/bin/phpunit -dmemory_limit=512M --coverage-clover=coverage.xml tests/
         if: ${{ matrix.php == '7.4' }}
       - name: submit coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2.1.0
         with:
           file: ./coverage.xml
         if: ${{ matrix.php == '7.4' }}
