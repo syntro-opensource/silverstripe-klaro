@@ -3,6 +3,7 @@
 namespace Syntro\SilverstripeKlaro\Tests;
 
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Control\Director;
 use Syntro\SilverstripeKlaro\KlaroRequirements_Backend;
 use Syntro\SilverstripeKlaro\KlaroRequirements;
 
@@ -76,5 +77,28 @@ class KlaroRequirementsTest extends SapphireTest
 
         $this->assertEquals(1, count($backend->getKlaroCss()));
         $this->assertArrayHasKey('/file.css', $backend->getKlaroCss());
+    }
+
+    /**
+     * testCanServeWith
+     *
+     * @return void
+     */
+    public function testCanServeWith()
+    {
+        $currentType = Director::get_session_environment_type();
+        define('SS_ENVIRONMENT_TYPE', 'dev');
+        $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
+        $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
+        define('SS_ENVIRONMENT_TYPE', 'test');
+        $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
+        define('SS_ENVIRONMENT_TYPE', 'live');
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
+        $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
+        define('SS_ENVIRONMENT_TYPE', $currentType);
     }
 }

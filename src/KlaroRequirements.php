@@ -4,6 +4,7 @@ namespace Syntro\SilverstripeKlaro;
 
 use SilverStripe\View\Requirements;
 use SilverStripe\View\Requirements_Backend;
+use SilverStripe\Control\Director;
 use Syntro\SilverstripeKlaro\KlaroRequirements_Backend;
 
 /**
@@ -21,6 +22,21 @@ use Syntro\SilverstripeKlaro\KlaroRequirements_Backend;
  */
 class KlaroRequirements
 {
+
+    /**
+     * @var string
+     */
+    const SERVE_LIVE = 'SERVELIVE';
+
+    /**
+     * @var string
+     */
+    const SERVE_LIVETEST = 'SERVELIVETEST';
+
+    /**
+     * @var string
+     */
+    const SERVE_ALWAYS = 'SERVE_ALWAYS';
 
     /**
      * Instance of the requirements for storage. You can create your own backend to change the
@@ -47,10 +63,17 @@ class KlaroRequirements
      *                           - 'type' : Override script type= value.
      *                           - 'integrity' : SubResource Integrity hash
      *                           - 'crossorigin' : Cross-origin policy for the resource
+     * @param  string $env       = KlaroRequirements::SERVE_LIVETEST where to serve this. available options are:
+     *                           - KlaroRequirements::SERVE_LIVE : serve only in live env.
+     *                           - KlaroRequirements::SERVE_LIVETEST : serve only in dev mode
+     *                           - KlaroRequirements::SERVE_ALWAYS : serve always
      * @return void
      */
-    public static function klaroJavascript($file, $klaroName, $options = [])
+    public static function klaroJavascript($file, $klaroName, $options = [], $env = KlaroRequirements::SERVE_LIVETEST)
     {
+        if (!static::canServeWith($env)) {
+            return;
+        }
         /** @var KlaroRequirements_Backend */
         $backend = self::backend();
         $backend->klaroJavascript($file, $klaroName, $options);
@@ -62,10 +85,17 @@ class KlaroRequirements
      * @param string $script       The script content as a string (without enclosing `<script>` tag)
      * @param string $klaroName    the name used to identify the service
      * @param string $uniquenessID A unique ID that ensures a piece of code is only added once
+     * @param string $env          = KlaroRequirements::SERVE_LIVETEST where to serve this. available options are:
+     *                             - KlaroRequirements::SERVE_LIVE : serve only in live env.
+     *                             - KlaroRequirements::SERVE_LIVETEST : serve only in dev mode
+     *                             - KlaroRequirements::SERVE_ALWAYS : serve always
      * @return void
      */
-    public static function customKlaroScript($script, $klaroName, $uniquenessID = null)
+    public static function customKlaroScript($script, $klaroName, $uniquenessID = null, $env = KlaroRequirements::SERVE_LIVETEST)
     {
+        if (!static::canServeWith($env)) {
+            return;
+        }
         /** @var KlaroRequirements_Backend */
         $backend = self::backend();
         $backend->customKlaroScript($script, $klaroName, $uniquenessID);
@@ -89,5 +119,22 @@ class KlaroRequirements
         /** @var KlaroRequirements_Backend */
         $backend = self::backend();
         $backend->klaroCss($file, $klaroName, $media, $options);
+    }
+
+    /**
+     * canServeWith - checks if the current environment allows serving with the
+     * given Serving mode
+     *
+     * @param  string $key the key
+     * @return boolean
+     */
+    public static function canServeWith($key)
+    {
+        if (Director::isTest()) {
+            return $key === self::SERVE_LIVETEST || $key === self::SERVE_ALWAYS;
+        } elseif (Director::isDev()) {
+            return $key === self::SERVE_ALWAYS;
+        }
+        return true;
     }
 }
