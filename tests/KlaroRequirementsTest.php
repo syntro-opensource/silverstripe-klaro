@@ -86,19 +86,19 @@ class KlaroRequirementsTest extends SapphireTest
      */
     public function testCanServeWith()
     {
-        $currentType = Director::get_session_environment_type();
-        define('SS_ENVIRONMENT_TYPE', 'dev');
+        $currentType = Director::get_environment_type();
+        Director::set_environment_type('dev');
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        define('SS_ENVIRONMENT_TYPE', 'test');
+        Director::set_environment_type('test');
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        define('SS_ENVIRONMENT_TYPE', 'live');
+        Director::set_environment_type('live');
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        define('SS_ENVIRONMENT_TYPE', $currentType);
+        Director::set_environment_type($currentType);
     }
 }
