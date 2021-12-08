@@ -52,7 +52,7 @@ class KlaroRequirementsTest extends SapphireTest
         $this->assertEquals(1, count($backend->getKlaroJavascript()));
         KlaroRequirements::klaroJavascript('/file_dev.js', 'namedev');
         $this->assertEquals(1, count($backend->getKlaroJavascript()));
-        $this->assertArrayHasKey('/file_dev.js', $backend->getKlaroJavascript());
+        $this->assertArrayNotHasKey('/file_dev.js', $backend->getKlaroJavascript());
 
         $kernel->setEnvironment($currentType);
     }
