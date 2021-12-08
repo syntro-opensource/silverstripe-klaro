@@ -40,15 +40,20 @@ class KlaroRequirementsTest extends SapphireTest
     {
         $kernel = Injector::inst()->get(Kernel::class);
         $currentType = $kernel->getEnvironment();
-        $kernel->setEnvironment(Kernel::LIVE);
         $backend = KlaroRequirements::backend();
 
+        $kernel->setEnvironment(Kernel::LIVE);
         $this->assertEquals(0, count($backend->getKlaroJavascript()));
-
         KlaroRequirements::klaroJavascript('/file.js', 'name');
-
         $this->assertEquals(1, count($backend->getKlaroJavascript()));
         $this->assertArrayHasKey('/file.js', $backend->getKlaroJavascript());
+
+        $kernel->setEnvironment(Kernel::DEV);
+        $this->assertEquals(1, count($backend->getKlaroJavascript()));
+        KlaroRequirements::klaroJavascript('/file_dev.js', 'namedev');
+        $this->assertEquals(1, count($backend->getKlaroJavascript()));
+        $this->assertArrayHasKey('/file_dev.js', $backend->getKlaroJavascript());
+
         $kernel->setEnvironment($currentType);
     }
 
@@ -61,14 +66,18 @@ class KlaroRequirementsTest extends SapphireTest
     {
         $kernel = Injector::inst()->get(Kernel::class);
         $currentType = $kernel->getEnvironment();
-        $kernel->setEnvironment(Kernel::LIVE);
         $backend = KlaroRequirements::backend();
 
+        $kernel->setEnvironment(Kernel::LIVE);
         $this->assertEquals(0, count($backend->getcustomKlaroScript()));
-
         KlaroRequirements::customKlaroScript('script', 'name');
-
         $this->assertEquals(1, count($backend->getcustomKlaroScript()));
+
+        $kernel->setEnvironment(Kernel::DEV);
+        $this->assertEquals(1, count($backend->getcustomKlaroScript()));
+        KlaroRequirements::customKlaroScript('scriptdev', 'namedev');
+        $this->assertEquals(1, count($backend->getcustomKlaroScript()));
+
         $kernel->setEnvironment($currentType);
     }
 
