@@ -61,6 +61,7 @@ class KlaroRequirementsTest extends SapphireTest
     {
         $kernel = Injector::inst()->get(Kernel::class);
         $currentType = $kernel->getEnvironment();
+        $kernel->setEnvironment(Kernel::LIVE);
         $backend = KlaroRequirements::backend();
 
         $this->assertEquals(0, count($backend->getcustomKlaroScript()));
