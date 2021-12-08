@@ -4,6 +4,8 @@ namespace Syntro\SilverstripeKlaro\Tests;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Control\Director;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Kernel;
 use Syntro\SilverstripeKlaro\KlaroRequirements_Backend;
 use Syntro\SilverstripeKlaro\KlaroRequirements;
 
@@ -36,6 +38,9 @@ class KlaroRequirementsTest extends SapphireTest
      */
     public function testKlaroJavascript()
     {
+        $kernel = Injector::inst()->get(Kernel::class);
+        $currentType = $kernel->getEnvironment();
+        $kernel->setEnvironment(Kernel::LIVE);
         $backend = KlaroRequirements::backend();
 
         $this->assertEquals(0, count($backend->getKlaroJavascript()));
@@ -44,6 +49,7 @@ class KlaroRequirementsTest extends SapphireTest
 
         $this->assertEquals(1, count($backend->getKlaroJavascript()));
         $this->assertArrayHasKey('/file.js', $backend->getKlaroJavascript());
+        $kernel->setEnvironment($currentType);
     }
 
     /**
@@ -53,6 +59,8 @@ class KlaroRequirementsTest extends SapphireTest
      */
     public function testCustomKlaroScript()
     {
+        $kernel = Injector::inst()->get(Kernel::class);
+        $currentType = $kernel->getEnvironment();
         $backend = KlaroRequirements::backend();
 
         $this->assertEquals(0, count($backend->getcustomKlaroScript()));
@@ -60,6 +68,7 @@ class KlaroRequirementsTest extends SapphireTest
         KlaroRequirements::customKlaroScript('script', 'name');
 
         $this->assertEquals(1, count($backend->getcustomKlaroScript()));
+        $kernel->setEnvironment($currentType);
     }
 
     /**
@@ -86,19 +95,21 @@ class KlaroRequirementsTest extends SapphireTest
      */
     public function testCanServeWith()
     {
-        $currentType = Director::get_environment_type();
-        Director::set_environment_type('dev');
+
+        $kernel = Injector::inst()->get(Kernel::class);
+        $currentType = $kernel->getEnvironment();
+        $kernel->setEnvironment(Kernel::DEV);
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        Director::set_environment_type('test');
+        $kernel->setEnvironment(Kernel::TEST);
         $this->assertFalse(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        Director::set_environment_type('live');
+        $kernel->setEnvironment(Kernel::LIVE);
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVE));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_LIVETEST));
         $this->assertTrue(KlaroRequirements::canServeWith(KlaroRequirements::SERVE_ALWAYS));
-        Director::set_environment_type($currentType);
+        $kernel->setEnvironment($currentType);
     }
 }
