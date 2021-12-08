@@ -48,7 +48,7 @@ use Syntro\SilverstripeKlaro\KlaroRequirements;
 
 // ...
 
-KlaroRequirements::klaroJavascript('path/to/file.js', 'myservice');
+KlaroRequirements::klaroJavascript('path/to/file.js', 'myservice', [], KlaroRequirements::SERVE_ALWAYS);
 
 ```
 In order to add this service to the notice, create a config like so:
