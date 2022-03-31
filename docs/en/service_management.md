@@ -67,9 +67,13 @@ Syntro\SilverstripeKlaro\Config:
             purposes: [ 'mypurpose' ]
             cookies:
                 - _cookie
-                - [ 'cookie', '/', 'localhost']
+                - [ 'cookie', '/', 'yourdomain.com']
+                - '/^_cookie(_.*)?/'
+                - ['/^_cookie(_.*)?/', '/', 'yourdomain.com']
 ```
-> Currently, regex are not working!
+
+> **Note about regular expressions**: You will have to write them as string in
+> yaml config or in PHP code. They will be hydrated in the frontend.
 
 ## Configure klaro
 Global options are available via the `klaro_options` config option:
