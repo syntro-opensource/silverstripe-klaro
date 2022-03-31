@@ -44,7 +44,8 @@ class Config
      * @var array
      */
     private static $klaro_options = [
-        'htmlTexts' => true
+        'htmlTexts' => true,
+        'acceptAll' => true,
     ];
 
      /**
