@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="1.2.0"></a>
+## [1.2.0] - 2022-03-31
+### 🍰 Added
+- Regular expressions for service cookies
+
+### 🔧 Changed
+- `acceptAll` is `true` by default
+
+### 🗑 Removed
+- php 7.3 from testsuite
+- PHP 7.1 & 7.2 support
+
+
 <a name="1.1.0"></a>
 ## [1.1.0] - 2021-09-24
 ### 🍰 Added
@@ -42,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - heredoc
 
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.0.0...1.0.1
