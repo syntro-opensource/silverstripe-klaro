@@ -52,6 +52,8 @@ Each service can be configured using the options available:
 - `required` : (boolean) specify if this service is required
 - `optOut` : (boolean) make this service opt out
 - `onlyOnce` : (boolean) load this service only once
+- `extDependsOn` : (array) make this service dependent on the ones in the array
+
 
 Each Purpose can be configured with a `title` and a `description`.
 

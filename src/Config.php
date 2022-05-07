@@ -77,6 +77,7 @@ class Config
       * - 'required' : (boolean) specify if this service is required
       * - 'optOut' : (boolean) make this service opt out
       * - 'onlyOnce' : (boolean) load this service only once
+      * - 'extDependsOn' : (array) triggers a relationship between two services.
       *
       * @config
       * @var array
@@ -254,6 +255,7 @@ class Config
                 'required',
                 'optOut',
                 'onlyOnce',
+                'extDependsOn',
             ];
             foreach ($extraKeys as $key) {
                 if (isset($data[$key])) {
