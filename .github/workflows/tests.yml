@@ -40,7 +40,7 @@ jobs:
             | php && \
             mv -f composer.phar /usr/local/bin/composer
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
       - name: install dependencies
         run: |
           composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
@@ -67,7 +67,7 @@ jobs:
             | php && \
             mv -f composer.phar /usr/local/bin/composer
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
       - name: install dependencies
         run: |
           composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
       - name: lint source
         uses: chindit/actions-phpcs@master
         with:
