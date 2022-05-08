@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="1.3.0"></a>
+## [1.3.0] - 2022-05-09
+### 🍰 Added
+- service dependencies
+
+
 <a name="1.2.0"></a>
 ## [1.2.0] - 2022-03-31
 ### 🍰 Added
@@ -55,7 +61,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - heredoc
 
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.0...HEAD
+[1.3.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.0.0...1.0.1
