@@ -13,6 +13,9 @@ window.klaroUpdatingDependentState = false;
 
 const watcher = {
   update(obj, nameo, data) {
+    if (nameo !== 'consents') {
+      return;
+    }
     if (!window.klaroUpdatingDependentState) {
       window.klaroUpdatingDependentState = true;
       const { config: { services } } = obj;
