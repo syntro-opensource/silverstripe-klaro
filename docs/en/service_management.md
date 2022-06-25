@@ -19,9 +19,9 @@ functions:
 use Syntro\SilverstripeKlaro\KlaroRequirements;
 
 // Add a javascript file
-KlaroRequirements::klaroJavascript('path/to/file.js', 'myservice');
+KlaroRequirements::klaroJavascript('path/to/file.js', 'myservice', [], KlaroRequirements::SERVE_ALWAYS);
 // Add a css file
-KlaroRequirements::klaroCss('path/to/file.css', 'myservice');
+KlaroRequirements::klaroCss('path/to/file.css', 'myservice', [], KlaroRequirements::SERVE_ALWAYS);
 // Add a custom script
 KlaroRequirements::customKlaroScript(<<<JS alert('hello') JS, 'myservice');
 ```
