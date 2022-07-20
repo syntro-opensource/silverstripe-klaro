@@ -42,6 +42,13 @@
             "client/dist"
         ]
     },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true,
+            "silverstripe/recipe-plugin": true
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
