@@ -1,90 +1,47 @@
 name: 🎭 Tests
 on:
-  - push
-env:
-  DB: MYSQL
-  PDO: 1
-  SS_ENVIRONMENT_TYPE: "dev"
-  RECIPE_CMS_VERSION: 4.x-dev
+  push:
+    paths-ignore:
+      - .chglog/**
+      - .github/**
+      - '!.github/workflows/tests.yml'
+      - .editorconfig
+      - .gitattributes
+      - .gitignore
+      - .htaccess
+      - '**.md'
+    branches:
+      - master
+  pull_request:
+    paths-ignore:
+      - .chglog/**
+      - .github/**
+      - '!.github/workflows/tests.yml'
+      - .editorconfig
+      - .gitattributes
+      - .gitignore
+      - .htaccess
+      - '**.md'
+    branches:
+      - master
+
 jobs:
-  phpunit:
-    name: 🧩 PHPUnit
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php:
-          - 7.4
-    container: brettt89/silverstripe-web:${{ matrix.php }}-apache
-    services:
-      database:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    env:
-      SS_DEFAULT_ADMIN_USERNAME: admin
-      SS_DEFAULT_ADMIN_PASSWORD: admin
-      SS_DATABASE_SERVER: database
-      SS_DATABASE_NAME: ss_default_${{ matrix.php }}
-      SS_DATABASE_USERNAME: root
-      SS_DATABASE_PASSWORD: ''
-      SS_ENVIRONMENT_TYPE: dev
-    steps:
-      - name: Install Composer
-        run: |
-          curl \
-            -sS https://getcomposer.org/installer \
-            | php && \
-            mv -f composer.phar /usr/local/bin/composer
-      - name: Checkout code
-        uses: actions/checkout@v3.0.2
-      - name: install dependencies
-        run: |
-          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
-          composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
-      - name: run phpunit
-        run: vendor/bin/phpunit -c "phpunit.xml" tests/
-      - name: generate coverage
-        run: phpdbg -qrr vendor/bin/phpunit -dmemory_limit=512M --coverage-clover=coverage.xml tests/
-        if: ${{ matrix.php == '7.4' }}
-      - name: submit coverage
-        uses: codecov/codecov-action@v3.1.0
-        with:
-          file: ./coverage.xml
-        if: ${{ matrix.php == '7.4' }}
-  phpstan:
-    name: 🔺 PHPStan
-    runs-on: ubuntu-latest
-    container: brettt89/silverstripe-web:7.4-apache
-    steps:
-      - name: Install Composer
-        run: |
-          curl \
-            -sS https://getcomposer.org/installer \
-            | php && \
-            mv -f composer.phar /usr/local/bin/composer
-      - name: Checkout code
-        uses: actions/checkout@v3.0.2
-      - name: install dependencies
-        run: |
-          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
-          composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
-      - name: run phpstan
-        run: vendor/bin/phpstan analyse src/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
-  phpcs:
-    name: 🔮 PHPcs
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.0.2
-      - name: lint source
-        uses: chindit/actions-phpcs@master
-        with:
-          dir: src/
-      - name: lint tests
-        uses: chindit/actions-phpcs@master
-        with:
-          dir: tests/
+  silverstripe-module:
+    name: 🧰 Silverstripe Module Testsuite
+    uses: syntro-opensource/workflows/.github/workflows/silverstripe-module.yml@master
+    with:
+      phpunit: true
+      phpstan: true
+      phpcs: true
+  silverstripe-client:
+    name: 📦 Client Testsuite
+    uses: syntro-opensource/workflows/.github/workflows/client.yml@master
+    with:
+      eslint: true
+      eslint_dir: client/src/
+      eslint_configfile: client/src/.eslintrc
+      # eslint_ext:
+      # eslint_max-warnings:
+      stylelint: true
+      stylelint_glob: client/src/**/*.scss
+      # stylelint_max-warnings:
