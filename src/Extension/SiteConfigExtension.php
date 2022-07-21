@@ -19,6 +19,7 @@ class SiteConfigExtension extends DataExtension
 {
     /**
      * Database fields
+     * @config
      * @var array
      */
     private static $db = [
@@ -28,6 +29,7 @@ class SiteConfigExtension extends DataExtension
 
     /**
      * Has_one relationship
+     * @config
      * @var array
      */
     private static $has_one = [
@@ -36,6 +38,7 @@ class SiteConfigExtension extends DataExtension
 
     /**
      * Defines db fields that are translatable.
+     * @config
      * @var array
      */
     private static $translate = [

@@ -28,7 +28,7 @@ class KlaroRequirements
      *
      * @var Requirements_Backend
      */
-    private static $backend = null;
+    // private static $backend = null;
 
     /**
      * @return Requirements_Backend
