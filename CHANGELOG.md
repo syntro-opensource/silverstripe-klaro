@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="1.3.1"></a>
+## [1.3.1] - 2022-07-21
+### 🍰 Added
+- standardized testsuites ([#40](https://github.com/syntro-opensource/silverstripe-klaro/issues/40))
+
+### 🐞 Fixed
+- Dependabot correctly prefixes updates
+- composer allows plugins
+
+
 <a name="1.3.0"></a>
 ## [1.3.0] - 2022-05-09
 ### 🍰 Added
@@ -61,7 +71,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - heredoc
 
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.1...HEAD
+[1.3.1]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.0.1...1.1.0
