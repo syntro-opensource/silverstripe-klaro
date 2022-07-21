@@ -23,14 +23,6 @@ class KlaroRequirements
 {
 
     /**
-     * Instance of the requirements for storage. You can create your own backend to change the
-     * default JS and CSS inclusion behaviour.
-     *
-     * @var Requirements_Backend
-     */
-    // private static $backend = null;
-
-    /**
      * @return Requirements_Backend
      */
     public static function backend()
