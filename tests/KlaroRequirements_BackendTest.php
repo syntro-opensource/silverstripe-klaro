@@ -145,7 +145,7 @@ class KlaroRequirements_BackendTest extends SapphireTest
         ]);
 
         $insertedHTML = $backend->includeInHTML(self::HTMLCONTENT);
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<script type="text/plain" data-type="testtype" data-src="/test.js" data-name="testservice" crossorigin="testcrossorigin"></script>',
             $insertedHTML
         );
@@ -162,7 +162,7 @@ class KlaroRequirements_BackendTest extends SapphireTest
         $backend->customKlaroScript('some script', 'testservice', '123');
 
         $insertedHTML = $backend->includeInHTML(self::HTMLCONTENT);
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<script type="text/plain" data-name="testservice" data-type="application/javascript">//<![CDATA[
 some script
 //]]></script>',
@@ -184,7 +184,7 @@ some script
         ]);
 
         $insertedHTML = $backend->includeInHTML(self::HTMLCONTENT);
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<link type="text/plain" rel="stylesheet" data-type="text/css" data-href="/test.css" data-name="testservice" media="print" integrity="testintegrity" crossorigin="testcrossorigin" />',
             $insertedHTML
         );
