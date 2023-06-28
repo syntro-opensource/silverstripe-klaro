@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="1.4.0"></a>
+## [1.4.0] - 2023-05-30
+### 🔧 Changed
+- changed constraints for SS5 support ([#44](https://github.com/syntro-opensource/silverstripe-klaro/issues/44))
+
+### 🧬 Dependencies
+- Bump [@syntro](https://github.com/syntro)-opensource/eslint-config-base from 1.1.1 to 1.1.2 ([#42](https://github.com/syntro-opensource/silverstripe-klaro/issues/42))
+
+
 <a name="1.3.1"></a>
 ## [1.3.1] - 2022-07-21
 ### 🍰 Added
@@ -71,7 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - heredoc
 
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.1...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.4.0...HEAD
+[1.4.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.1.0...1.2.0
