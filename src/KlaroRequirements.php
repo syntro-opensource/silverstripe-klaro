@@ -39,6 +39,8 @@ class KlaroRequirements
      *                           - 'type' : Override script type= value.
      *                           - 'integrity' : SubResource Integrity hash
      *                           - 'crossorigin' : Cross-origin policy for the resource
+     *                           - 'defer' : defer script loading until DOMContentLoaded event
+     *                           - 'async' : enable parallel fetching
      * @return void
      */
     public static function klaroJavascript($file, $klaroName, $options = [])
