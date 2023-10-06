@@ -49,6 +49,8 @@ class KlaroRequirements_Backend extends Requirements_Backend
      *                           - 'type' : Override script type= value.
      *                           - 'integrity' : SubResource Integrity hash
      *                           - 'crossorigin' : Cross-origin policy for the resource
+     *                           - 'defer' : defer script loading until DOMContentLoaded event
+     *                           - 'async' : enable parallel fetching
      * @return void
      */
     public function klaroJavascript($file, $klaroName, $options = [])
@@ -57,12 +59,16 @@ class KlaroRequirements_Backend extends Requirements_Backend
         $type = $options['type'] ?? null;
         $integrity = $options['integrity'] ?? null;
         $crossorigin = $options['crossorigin'] ?? null;
+        $defer = $options['defer'] ?? null;
+        $async = $options['async'] ?? null;
 
         $this->klaroJavascript[$file] = [
             'name' => $klaroName,
             'type' => $type,
             'integrity' => $integrity,
             'crossorigin' => $crossorigin,
+            'defer' => $defer,
+            'async' => $async,
         ];
     }
 
