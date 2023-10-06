@@ -226,6 +226,15 @@ class KlaroRequirements_Backend extends Requirements_Backend
             if (!empty($attributes['crossorigin'])) {
                 $htmlAttributes['crossorigin'] = $attributes['crossorigin'];
             }
+
+            if (!empty($attributes['defer'])) {
+                $htmlAttributes['defer'] = $attributes['defer'];
+            }
+
+            if (!empty($attributes['async'])) {
+                $htmlAttributes['async'] = $attributes['async'];
+            }
+
             $jsRequirements .= HTML::createTag('script', $htmlAttributes);
             $jsRequirements .= "\n";
         }
