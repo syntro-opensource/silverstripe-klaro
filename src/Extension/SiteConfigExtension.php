@@ -5,7 +5,7 @@ namespace Syntro\SilverstripeKlaro\Extension;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\CMS\Model\SiteTree;
 
 /**
@@ -15,7 +15,7 @@ use SilverStripe\CMS\Model\SiteTree;
  * @author Matthias Leutenegger <hello@syntro.ch>
  * @codeCoverageIgnore
  */
-class SiteConfigExtension extends DataExtension
+class SiteConfigExtension extends Extension
 {
     /**
      * Database fields
