@@ -185,7 +185,7 @@ some script
 
         $insertedHTML = $backend->includeInHTML(self::HTMLCONTENT);
         $this->assertStringContainsString(
-            '<link type="text/plain" rel="stylesheet" data-type="text/css" data-href="/test.css" data-name="testservice" media="print" integrity="testintegrity" crossorigin="testcrossorigin" />',
+            '<link type="text/plain" rel="stylesheet" data-type="text/css" data-href="/test.css" data-name="testservice" media="print" integrity="testintegrity" crossorigin="testcrossorigin">',
             $insertedHTML
         );
     }
