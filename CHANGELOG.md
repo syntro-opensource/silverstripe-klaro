@@ -8,8 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="6.0.0"></a>
+## [6.0.0] - 2025-12-08
+### 🍰 Added
+- support for Silverstripe 6 ([#47](https://github.com/syntro-opensource/silverstripe-klaro/issues/47))
+- defer & sync support for klaroJavascript ([#45](https://github.com/syntro-opensource/silverstripe-klaro/issues/45))
+
+
 <a name="1.4.0"></a>
-## [1.4.0] - 2023-05-30
+## [1.4.0] - 2023-06-28
 ### 🔧 Changed
 - changed constraints for SS5 support ([#44](https://github.com/syntro-opensource/silverstripe-klaro/issues/44))
 
@@ -80,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - heredoc
 
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.4.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-klaro/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.4.0...6.0.0
 [1.4.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/syntro-opensource/silverstripe-klaro/compare/1.2.0...1.3.0
