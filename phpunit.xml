@@ -2,11 +2,10 @@
     bootstrap="vendor/silverstripe/framework/tests/bootstrap.php"
     colors="true"
     backupGlobals="false"
-    backupStaticAttributes="false"
+    backupStaticProperties="false"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTestsThatDoNotTestAnything="true"
-    beStrictAboutTodoAnnotatedTests="true"
     failOnRisky="true"
     failOnWarning="true"
 >
@@ -14,12 +13,12 @@
         <directory>tests/php</directory>
     </testsuite>
 
-    <coverage>
-        <exclude>
-            <directory suffix=".php">vendor/</directory>
-        </exclude>
+    <source>
         <include>
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">./src</directory>
         </include>
-    </coverage>
+        <exclude>
+            <directory suffix=".php">vendor</directory>
+        </exclude>
+    </source>
 </phpunit>
