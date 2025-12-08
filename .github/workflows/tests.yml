@@ -26,22 +26,20 @@ on:
       - master
 
 jobs:
-  silverstripe-module:
-    name: 🧰 Silverstripe Module Testsuite
-    uses: syntro-opensource/workflows/.github/workflows/silverstripe-module.yml@master
+  silverstripe-module-6:
+    name: 🧰 Silverstripe Module Testsuite 6
+    uses: syntro-opensource/workflows/.github/workflows/silverstripe-module-6.yml@master
     with:
       phpunit: true
       phpstan: true
-      phpcs: true
-  silverstripe-client:
-    name: 📦 Client Testsuite
-    uses: syntro-opensource/workflows/.github/workflows/client.yml@master
+  silverstripe-module-codecoverage:
+    name: 📊 Silverstripe Code Coverage
+    uses: syntro-opensource/workflows/.github/workflows/silverstripe-module-codecoverage.yml@master
     with:
-      eslint: true
-      eslint_dir: client/src/
-      eslint_configfile: client/src/.eslintrc
-      # eslint_ext:
-      # eslint_max-warnings:
-      stylelint: true
-      stylelint_glob: client/src/**/*.scss
-      # stylelint_max-warnings:
+      php_version: 8.3
+      silverstripe_version: 6.0
+  silverstripe-phpcs:
+    name: 🧹 Silverstripe PHPCS
+    uses: syntro-opensource/workflows/.github/workflows/silverstripe-phpcs.yml@master
+    with:
+      dir: src/

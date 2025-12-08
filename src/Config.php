@@ -4,9 +4,9 @@ namespace Syntro\SilverstripeKlaro;
 
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Core\Config\Configurable;
-use SilverStripe\View\SSViewer;
+use SilverStripe\TemplateEngine\SSTemplateEngine;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
@@ -126,7 +126,7 @@ class Config
             $config[$option] = $value;
         }
         $config = json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
-        return SSViewer::execute_template('Syntro/SilverstripeKlaro/Config', ArrayData::create([
+        return SSTemplateEngine::execute_template('Syntro/SilverstripeKlaro/Config', ArrayData::create([
             'KlaroConfig' => DBHTMLText::create()->setValue($config),
         ]));
     }

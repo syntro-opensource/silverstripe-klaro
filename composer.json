@@ -9,19 +9,17 @@
         }
     ],
     "require": {
-        "php": ">=7.3.0",
-        "silverstripe/cms": "^4 || ^5",
-        "silverstripe/framework": "^4 || ^5"
+        "silverstripe/cms": "^6",
+        "silverstripe/framework": "^6"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",
-        "syntro/silverstripe-phpstan": "^1",
-        "phpunit/phpunit": "^9.5"
+        "cambis/silverstan": "^2.0",
+        "phpunit/phpunit": "^11.0"
     },
     "keywords": [
         "silverstripe",
-        "silverstripe 4",
-        "silverstripe 5"
+        "klaro"
     ],
     "license": "BSD-3-Clause",
     "autoload": {
