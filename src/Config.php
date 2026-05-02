@@ -9,6 +9,7 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\Model\ArrayData;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\View\ViewLayerData;
 
 /**
  * allows the configuration of klaro using the SilverStripe yaml config interface
@@ -126,9 +127,9 @@ class Config
             $config[$option] = $value;
         }
         $config = json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
-        return SSTemplateEngine::execute_template('Syntro/SilverstripeKlaro/Config', ArrayData::create([
+        return SSTemplateEngine::execute_template('Syntro/SilverstripeKlaro/Config', ViewLayerData::create(ArrayData::create([
             'KlaroConfig' => DBHTMLText::create()->setValue($config),
-        ]));
+        ])));
     }
 
     /**
